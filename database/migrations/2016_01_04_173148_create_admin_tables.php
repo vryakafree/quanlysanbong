@@ -100,6 +100,30 @@ class CreateAdminTables extends Migration
             $table->index('user_id');
             $table->timestamps();
         });
+
+        Schema::create('types', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('field_member');
+        });
+
+        Schema::create('fields', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('field_name', 30)->unique();
+            $table->integer('cost');
+            $table->integer('type_id');
+            $table->index(['type_id']);
+        });
+
+        Schema::create('book_field', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id');
+            $table->integer('field_id');
+            $table->dateTime('start_at');
+            $table->dateTime('end_at');
+            $table->tinyInteger('paid');
+            $table->integer('bill_cost');
+            $table->index(['user_id','field_id']);
+        });
     }
 
     /**
@@ -118,5 +142,8 @@ class CreateAdminTables extends Migration
         Schema::dropIfExists(config('admin.database.role_permissions_table'));
         Schema::dropIfExists(config('admin.database.role_menu_table'));
         Schema::dropIfExists(config('admin.database.operation_log_table'));
+        Schema::dropIfExists(config('types_table'));
+        Schema::dropIfExists(config('fields_table'));
+        Schema::dropIfExists(config('book_field_table'));
     }
 }
