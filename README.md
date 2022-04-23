@@ -141,11 +141,17 @@ docker-compose version 1.27.4, build 40524192
 
 ### 12. Cài đặt môi trường lập trình
 
-Ở lần đầu tiên thì nó sẽ tự động setup môi trường lập trình cho mình, sẽ mất vài phút tuỳ thuộc vào tốc độ mạng
+Ở lần đầu tiên thì nó sẽ tự động setup môi trường lập trình cho mình, sẽ mất vài phút tuỳ thuộc vào tốc độ mạng (lúc này không sử dụng lệnh down bên dưới nhé, chỉ khi nào không code nữa mới phải dùng để tắt máy ảo thôi!!!)
 
 ```bash
 cp .env.example .env
+
+# khởi động máy ảo docker (mỗi khi muốn localhost hoạt động thì chạy lại lệnh này:)
 ./vendor/bin/sail up -d
+
+-----------------------------------------------------------------
+# (khi cần tắt, không sử dụng localhost nữa thì sử dụng lệnh này:) 
+./vendor/bin/sail down -v
 ```
 
 Nếu quá trình diễn ra hoàn tất và trên Windows Terminal hiển thị như bên dưới là thành công
