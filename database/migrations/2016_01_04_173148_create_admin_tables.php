@@ -101,19 +101,6 @@ class CreateAdminTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('types', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('field_member');
-        });
-
-        Schema::create('fields', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('field_name', 30)->unique();
-            $table->integer('cost');
-            $table->integer('type_id');
-            $table->index(['type_id']);
-        });
-
         Schema::create('book_field', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
