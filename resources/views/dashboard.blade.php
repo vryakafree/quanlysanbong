@@ -31,6 +31,10 @@
                 <label for="field" class="form-label pd-10">Sân phù hợp: </label>
                 <select class="form-control text-align: center" name="field" id="field"></select>
             </div>
+            <div class="mb-3 pd-10 mt-4">
+                <label for="cost" class="form-label pd-10">Giá thuê sân: </label>
+                <select class="form-control text-align: center" name="cost" id="cost"></select>
+            </div>
 
             <div class="flex items-center justify-end mt-4">
                 <x-button class="ml-4">

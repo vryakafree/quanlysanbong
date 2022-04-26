@@ -44,8 +44,7 @@
             <div class="mt-4">
                 <x-label for="password" :value="__('Password')"/>
 
-                <x-input id="password" class="form-control w-full"
-                         data-toggle="password"
+                <x-input id="password" class="form-control"
                          type="password"
                          name="password"
                          required autocomplete="new-password"
@@ -56,8 +55,7 @@
             <div class="mt-4">
                 <x-label for="password_confirmation" :value="__('Confirm Password')"/>
 
-                <x-input id="password_confirmation" class="form-control w-full"
-                         data-toggle="password"
+                <x-input id="password_confirmation" class="form-control"
                          type="password"
                          name="password_confirmation" required
                          placeholder="Confirm the password"/>

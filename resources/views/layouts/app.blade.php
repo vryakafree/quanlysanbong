@@ -44,7 +44,7 @@
                 timePicker: true,
                 timePicker24Hour: true,
                 minDate: moment(),
-                timePickerIncrement: 15,
+                minMinute: 90,
                 opens: 'left',
                 locale: {
                     format: 'HH:mm'
