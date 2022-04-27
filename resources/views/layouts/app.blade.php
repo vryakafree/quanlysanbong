@@ -27,30 +27,33 @@
 
     <script>
         $(function () {
-            $('input[name="dates"]').daterangepicker({
+            $('input[name="datetimes"]').daterangepicker({
                 singleDatePicker: true,
                 minDate: moment(),
                 maxDate: moment().add(14, 'days'),
+                autoApply: true,
                 locale: {
-                    format: 'DD/MM/YYYY'
+                    format: 'DD/MM/YYYY HH:mm'
                 }
             });
-        });
-    </script>
+            $('input[name="datetimes"]').on('apply.daterangepicker', function(){
+                var tstart =  moment().startOf('hour').set('minute', 30);
+                var tend = moment(tstart).add(1.5, 'hour');
 
-    <script>
-        $(function () {
-            $('input[name="times"]').daterangepicker({
-                timePicker: true,
-                timePicker24Hour: true,
-                minDate: moment(),
-                minMinute: 90,
-                opens: 'left',
-                locale: {
-                    format: 'HH:mm'
-                }
-            }).on('show.daterangepicker', function (ev, picker) {
-                picker.container.find(".calendar-table").hide();
+                $('input[name="datetimes"]').daterangepicker({
+                    timePicker: true,
+                    timePicker24Hour: true,
+                    timePickerIncrement: 30,
+                    minDate: moment(),
+                    startDate: tstart,
+                    endDate: tend,
+                    locale: {
+                        format: 'DD/MM/YYYY HH:mm'
+                    }
+                }).on('show.daterangepicker', function (ev, picker) {
+                    picker.container.find(".calendar-table").hide();
+                    picker.container.find(".drp-selected").hide();
+                });
             });
         });
     </script>
