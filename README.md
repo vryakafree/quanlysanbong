@@ -27,7 +27,7 @@
 ### 2. Cài đặt [Docker](https://www.docker.com/)
 
 - Sau khi khởi động lại máy sẽ hiện lên bảng "WSL 2 installation is incomplete" báo WSL 2 chưa được cài đặt
-- Nhấp vào đường link "https://aka.ms/wsl2kernal" và làm theo bước 4 và 5 trên trang hướng dẫn
+- Nhấp vào đường link "https://aka.ms/wsl2kernel" và làm theo bước 4 và 5 trên trang hướng dẫn
 - Nhấp chọn Restart để khởi động lại Docker sau khi đã hoàn thành bước trên
 
 ### 3. Cài đặt [Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)
