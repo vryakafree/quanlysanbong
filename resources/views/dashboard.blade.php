@@ -10,7 +10,7 @@
                 <div class="text flex-container justify-center">
 
                     <div>
-                        <label for="date" class="form-label">Ngày đặt sân: </label>
+                        <label id="dtlb"></label>
                         <input type="text" id="date" name="datetimes"/>
                     </div>
                 </div>

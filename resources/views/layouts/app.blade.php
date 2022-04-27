@@ -25,69 +25,6 @@
     <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
-    <script>
-        $(function () {
-            $('input[name="datetimes"]').daterangepicker({
-                singleDatePicker: true,
-                minDate: moment(),
-                maxDate: moment().add(14, 'days'),
-                autoApply: true,
-                locale: {
-                    format: 'DD/MM/YYYY HH:mm'
-                }
-            });
-            $('input[name="datetimes"]').on('apply.daterangepicker', function(){
-                var tstart =  moment().startOf('hour').set('minute', 30);
-                var tend = moment(tstart).add(1.5, 'hour');
-
-                $('input[name="datetimes"]').daterangepicker({
-                    timePicker: true,
-                    timePicker24Hour: true,
-                    timePickerIncrement: 30,
-                    minDate: moment(),
-                    startDate: tstart,
-                    endDate: tend,
-                    locale: {
-                        format: 'DD/MM/YYYY HH:mm'
-                    }
-                }).on('show.daterangepicker', function (ev, picker) {
-                    picker.container.find(".calendar-table").hide();
-                    picker.container.find(".drp-selected").hide();
-                });
-            });
-        });
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#type').on('change', function() {
-                var typeID = $(this).val();
-                if(typeID) {
-                    $.ajax({
-                        url: '/getField/'+typeID,
-                        type: "GET",
-                        data : {"_token":"{{ csrf_token() }}"},
-                        dataType: "json",
-                        success:function(data)
-                        {
-                            if(data){
-                                $('#field').empty();
-                                $('#field').append('<option hidden>Chọn sân</option>');
-                                $.each(data, function(key, field){
-                                    $('select[name="field"]').append('<option value="'+ key +'">' + field.field_name+ '</option>');
-                                });
-                            }else{
-                                $('#field').empty();
-                            }
-                        }
-                    });
-                }else{
-                    $('#field').empty();
-                }
-            });
-        });
-    </script>
-
 </head>
 <body class="font-sans antialiased">
 <div class="min-h-screen bg-gray-100">
@@ -107,3 +44,68 @@
 </div>
 </body>
 </html>
+
+<script>
+    $(function () {
+        document.getElementById('dtlb').innerHTML = 'Bấm để chọn ngày: ';
+        $('input[name="datetimes"]').daterangepicker({
+            singleDatePicker: true,
+            minDate: moment(),
+            maxDate: moment().add(14, 'days'),
+            autoApply: true,
+            locale: {
+                format: 'DD/MM/YYYY HH:mm'
+            }
+        });
+        $('input[name="datetimes"]').on('apply.daterangepicker', function(){
+            document.getElementById('dtlb').innerHTML = 'Bấm để chọn giờ: ';
+            var tstart =  moment().startOf('hour').set('minute', 30);
+            var tend = moment(tstart).add(1.5, 'hour');
+
+            $('input[name="datetimes"]').daterangepicker({
+                timePicker: true,
+                timePicker24Hour: true,
+                timePickerIncrement: 30,
+                minDate: moment(),
+                startDate: tstart,
+                endDate: tend,
+                locale: {
+                    format: 'DD/MM/YYYY HH:mm'
+                }
+            }).on('show.daterangepicker', function (ev, picker) {
+                picker.container.find(".calendar-table").hide();
+                picker.container.find(".drp-selected").hide();
+            });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#type').on('change', function() {
+            var typeID = $(this).val();
+            if(typeID) {
+                $.ajax({
+                    url: '/getField/'+typeID,
+                    type: "GET",
+                    data : {"_token":"{{ csrf_token() }}"},
+                    dataType: "json",
+                    success:function(data)
+                    {
+                        if(data){
+                            $('#field').empty();
+                            $('#field').append('<option hidden>Chọn sân</option>');
+                            $.each(data, function(key, field){
+                                $('select[name="field"]').append('<option value="'+ key +'">' + field.field_name+ '</option>');
+                            });
+                        }else{
+                            $('#field').empty();
+                        }
+                    }
+                });
+            }else{
+                $('#field').empty();
+            }
+        });
+    });
+</script>
