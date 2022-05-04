@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
+use Illuminate\Contracts\Validation\Factory as ValidationFactory;
+
 class LoginRequest extends FormRequest
 {
     /**
@@ -29,9 +31,57 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required', 'string', 'email'],
+            'username' => ['required', 'string'],
             'password' => ['required', 'string'],
         ];
+    }
+
+    public function getCredentials()
+    {
+        // The form field for providing username or password
+        // have name of "username", however, in order to support
+        // logging users in with both (username and email)
+        // we have to check if user has entered one or another
+        $username = $this->get('username');
+
+        if ($this->isEmail($username)) {
+            return [
+                'email' => $username,
+                'password' => $this->get('password')
+            ];
+        }elseif ($this->isPhone($username)) {
+            return [
+                'phone' => $username,
+                'password' => $this->get('password')
+            ];
+        }
+
+        return $this->only('username', 'password');
+    }
+    /**
+     * Validate if provided parameter is valid email.
+     *
+     * @param $param
+     * @return bool
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    private function isEmail($param)
+    {
+        $factory = $this->container->make(ValidationFactory::class);
+
+        return ! $factory->make(
+            ['username' => $param],
+            ['username' => 'email']
+        )->fails();
+    }
+    private function isPhone($param)
+    {
+        $factory = $this->container->make(ValidationFactory::class);
+
+        return ! $factory->make(
+            ['username' => $param],
+            ['username' => 'int']
+        )->fails();
     }
 
     /**
@@ -45,11 +95,12 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+
+        if (! Auth::attempt($this->getCredentials(), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'username' => trans('auth.failed'),
             ]);
         }
 
@@ -74,7 +125,7 @@ class LoginRequest extends FormRequest
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
         throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
+            'username' => trans('auth.throttle', [
                 'seconds' => $seconds,
                 'minutes' => ceil($seconds / 60),
             ]),
@@ -88,6 +139,6 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey()
     {
-        return Str::lower($this->input('email')).'|'.$this->ip();
+        return Str::lower($this->input('username')).'|'.$this->ip();
     }
 }

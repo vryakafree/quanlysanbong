@@ -17,9 +17,10 @@
 
             <!-- Email Address -->
             <div>
-                <x-label for="email" :value="__('Email')" />
+                <x-label for="email" :value="__('UPE')" />
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+                <input type="text" class="form-control" name="username" value="{{ old('username') }}" required="required" autofocus>
+
             </div>
 
             <!-- Password -->
