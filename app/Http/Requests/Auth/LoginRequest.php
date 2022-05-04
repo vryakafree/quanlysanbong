@@ -80,7 +80,7 @@ class LoginRequest extends FormRequest
 
         return ! $factory->make(
             ['username' => $param],
-            ['username' => 'int']
+            ['username' => 'numeric']
         )->fails();
     }
 
