@@ -7,11 +7,13 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends AdminController
 {
     /**
-     * Title for current resource.
+     * Title for current resource.getImageAttribute
      *
      * @var string
      */
@@ -22,21 +24,34 @@ class UserController extends AdminController
      *
      * @return Grid
      */
+
     protected function grid()
     {
         $grid = new Grid(new User());
 
         $grid->column('id', __('Id'));
         $grid->column('username', __('Username'));
-        $grid->column('password', __('Password'));
         $grid->column('name', __('Name'));
         $grid->column('email', __('Email'));
         $grid->column('phone', __('Phone'));
+        $grid->column('avatar', __('Avatar'))->display(function ($image) {
+            return Storage::disk('admin')->url($image);
+        });
         $grid->column('email_verified_at', __('Email verified at'));
-        $grid->column('avatar', __('Avatar'));
-        $grid->column('remember_token', __('Remember token'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
+
+        $grid->actions(function (Grid\Displayers\Actions $actions) {
+            if ($actions->getKey() == 1) {
+                $actions->disableDelete();
+            }
+        });
+
+        $grid->tools(function (Grid\Tools $tools) {
+            $tools->batch(function (Grid\Tools\BatchActions $actions) {
+                $actions->disableDelete();
+            });
+        });
 
         return $grid;
     }
@@ -58,7 +73,9 @@ class UserController extends AdminController
         $show->field('email', __('Email'));
         $show->field('phone', __('Phone'));
         $show->field('email_verified_at', __('Email verified at'));
-        $show->field('avatar', __('Avatar'));
+        $show->field('avatar', __('Avatar'))->as(function ($image) {
+            return $image;
+        })->image();
         $show->field('remember_token', __('Remember token'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
@@ -75,14 +92,35 @@ class UserController extends AdminController
     {
         $form = new Form(new User());
 
-        $form->text('username', __('Username'));
-        $form->password('password', __('Password'));
-        $form->text('name', __('Name'));
+        $userTable = config('admin.database.users_table');
+        $connection = config('admin.database.connection');
+
+        $form->display('id', 'ID');
+        $form->text('name', __('Name'))->rules('required');
+        $form->text('username', __('Username'))
+            ->creationRules(['required', "unique"])
+            ->updateRules(['required', "unique:{$connection}.{$userTable},username,{{id}}"]);
+        $form->password('password', __('Password'))->rules('required')
+            ->default(function ($form) {
+                return $form->model()->password;
+            });
         $form->email('email', __('Email'));
-        $form->mobile('phone', __('Phone'));
+        $form->mobile('phone', __('Phone'))->options(['removeMaskOnSubmit' => 'true'])
+            ->creationRules(['required', "unique"])
+            ->updateRules(['required', "unique:{$connection}.{$userTable},phone,{{id}}"]);
         $form->datetime('email_verified_at', __('Email verified at'))->default(date('Y-m-d H:i:s'));
-        $form->image('avatar', __('Avatar'));
+        $form->image('avatar', __('Avatar'))
+            ->move('public/img/avatar');
         $form->text('remember_token', __('Remember token'));
+
+        $form->saving(function (Form $form) {
+            if ($form->password && $form->model()->password != $form->password) {
+                $form->password = Hash::make($form->password);
+            }
+            $form->image('avatar')
+                ->dir('img/avatar');
+
+        });
 
         return $form;
     }
