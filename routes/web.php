@@ -1,5 +1,7 @@
 <?php
 
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    if (Auth::User() != null) {
+        return redirect('dashboard');
+    }
     return view('auth.login');
 });
 
@@ -32,5 +37,5 @@ Route::get('/timetable', function () {
 })->middleware(['auth'])->name('timetable');
 
 Route::resource('fields', 'App\Http\Controllers\FieldsController');
-
+Route::resource('bookfields', 'App\Http\Controllers\BookFieldsController');
 require __DIR__.'/auth.php';
