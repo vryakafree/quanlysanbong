@@ -3,13 +3,12 @@
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Auth\Events\Lockout;
+use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
-
-use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 
 class LoginRequest extends FormRequest
 {
@@ -36,54 +35,6 @@ class LoginRequest extends FormRequest
         ];
     }
 
-    public function getCredentials()
-    {
-        // The form field for providing username or password
-        // have name of "username", however, in order to support
-        // logging users in with both (username and email)
-        // we have to check if user has entered one or another
-        $username = $this->get('username');
-
-        if ($this->isEmail($username)) {
-            return [
-                'email' => $username,
-                'password' => $this->get('password')
-            ];
-        }elseif ($this->isPhone($username)) {
-            return [
-                'phone' => $username,
-                'password' => $this->get('password')
-            ];
-        }
-
-        return $this->only('username', 'password');
-    }
-    /**
-     * Validate if provided parameter is valid email.
-     *
-     * @param $param
-     * @return bool
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     */
-    private function isEmail($param)
-    {
-        $factory = $this->container->make(ValidationFactory::class);
-
-        return ! $factory->make(
-            ['username' => $param],
-            ['username' => 'email']
-        )->fails();
-    }
-    private function isPhone($param)
-    {
-        $factory = $this->container->make(ValidationFactory::class);
-
-        return ! $factory->make(
-            ['username' => $param],
-            ['username' => 'numeric']
-        )->fails();
-    }
-
     /**
      * Attempt to authenticate the request's credentials.
      *
@@ -96,7 +47,7 @@ class LoginRequest extends FormRequest
         $this->ensureIsNotRateLimited();
 
 
-        if (! Auth::attempt($this->getCredentials(), $this->boolean('remember'))) {
+        if (!Auth::attempt($this->getCredentials(), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
@@ -116,7 +67,7 @@ class LoginRequest extends FormRequest
      */
     public function ensureIsNotRateLimited()
     {
-        if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
+        if (!RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
             return;
         }
 
@@ -139,6 +90,56 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey()
     {
-        return Str::lower($this->input('username')).'|'.$this->ip();
+        return Str::lower($this->input('username')) . '|' . $this->ip();
+    }
+
+    public function getCredentials()
+    {
+        // The form field for providing username or password
+        // have name of "username", however, in order to support
+        // logging users in with both (username and email)
+        // we have to check if user has entered one or another
+        $username = $this->get('username');
+
+        if ($this->isEmail($username)) {
+            return [
+                'email' => $username,
+                'password' => $this->get('password')
+            ];
+        } elseif ($this->isPhone($username)) {
+            return [
+                'phone' => $username,
+                'password' => $this->get('password')
+            ];
+        }
+
+        return $this->only('username', 'password');
+    }
+
+    /**
+     * Validate if provided parameter is valid email.
+     *
+     * @param $param
+     * @return bool
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    private function isEmail($param)
+    {
+        $factory = $this->container->make(ValidationFactory::class);
+
+        return !$factory->make(
+            ['username' => $param],
+            ['username' => 'email']
+        )->fails();
+    }
+
+    private function isPhone($param)
+    {
+        $factory = $this->container->make(ValidationFactory::class);
+
+        return !$factory->make(
+            ['username' => $param],
+            ['username' => 'numeric']
+        )->fails();
     }
 }

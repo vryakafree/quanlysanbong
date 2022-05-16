@@ -14,7 +14,7 @@
 ## Thời gian thực hiện
 
 - Bắt đầu - 21/03/2022
-- Kết thúc - 12/06/2022 
+- Kết thúc - 12/06/2022
 
 ## Hướng dẫn cài đặt môi trường dự án
 
@@ -40,24 +40,25 @@ wsl --set-default-version 2
 
 ### 5. Cài đặt [Ubuntu 20.04](https://www.microsoft.com/store/productId/9MTTCL66CPXJ)
 
-- Ở lần mở đầu tiên Ubuntu sẽ yêu cầu điền username và password, password rất quan trọng nên hãy nhớ (khi nhập password ubuntu sẽ ẩn chữ chứ không phải do chưa nhập đâu nhé!)
+- Ở lần mở đầu tiên Ubuntu sẽ yêu cầu điền username và password, password rất quan trọng nên hãy nhớ (khi nhập password
+  ubuntu sẽ ẩn chữ chứ không phải do chưa nhập đâu nhé!)
 - Sau khi đã thực hiện đầy đủ thì mở Windows Terminal và chạy lệnh sau:
 
     ```bash
     wsl -l -v
     ```
-    
-    Nếu kết quả trả về như bên dưới là thành công:
-    
+
+  Nếu kết quả trả về như bên dưới là thành công:
+
     ```bash
       NAME                   STATE           VERSION
     * docker-desktop         Running         2
       docker-desktop-data    Running         2
       Ubuntu-20.04           Stopped         2
     ```
-    
-    Nếu ở mục Ubuntu-20.04 hiển thị VERSION là 1 thì chạy lệnh sau để chuyển phiên bản sang WSL 2:
-    
+
+  Nếu ở mục Ubuntu-20.04 hiển thị VERSION là 1 thì chạy lệnh sau để chuyển phiên bản sang WSL 2:
+
     ```bash
     wsl --set-version Ubuntu-20.04 2
     ```
@@ -79,7 +80,9 @@ wsl --set-default-version 2
 docker -v
 docker-compose -v
 ```
+
 Nếu kết quả như bên dưới là thành công
+
 ```bash
 # ...
 Docker version 20.10.2, build 2291f61
@@ -104,10 +107,10 @@ git clone https://github.com/vryakafree/quanlysanbong.git
 
 ![image](https://user-images.githubusercontent.com/58522357/164884323-f3e25bfa-f698-4197-b4fe-6d4b0046099b.png)
 
-- Nhớ lưu lại token đề phòng, sau khi có token, dán nó vào phần tài khoản & mật khẩu (khi nhập password ubuntu sẽ ẩn chữ chứ không phải do chưa nhập đâu nhé!)
+- Nhớ lưu lại token đề phòng, sau khi có token, dán nó vào phần tài khoản & mật khẩu (khi nhập password ubuntu sẽ ẩn chữ
+  chứ không phải do chưa nhập đâu nhé!)
 
 ![image](https://user-images.githubusercontent.com/58522357/164884442-d513b6e2-3142-406f-afd0-0bebfaffc2ea.png)
-
 
 ### 11. Cài đặt thư viện trong đồ án
 
@@ -141,7 +144,8 @@ docker-compose version 1.27.4, build 40524192
 
 ### 12. Cài đặt môi trường lập trình
 
-Ở lần đầu tiên thì nó sẽ tự động setup môi trường lập trình cho mình, sẽ mất vài phút tuỳ thuộc vào tốc độ mạng (lúc này không sử dụng lệnh down bên dưới nhé, chỉ khi nào không code nữa mới phải dùng để tắt máy ảo thôi!!!)
+Ở lần đầu tiên thì nó sẽ tự động setup môi trường lập trình cho mình, sẽ mất vài phút tuỳ thuộc vào tốc độ mạng (lúc này
+không sử dụng lệnh down bên dưới nhé, chỉ khi nào không code nữa mới phải dùng để tắt máy ảo thôi!!!)
 
 ```bash
 cp .env.example .env
@@ -189,9 +193,9 @@ docker volume rm $(docker volume ls -q)
 
 ![image](https://user-images.githubusercontent.com/58522357/164885035-cdd90fb4-41e6-4383-9540-90ae7eaf1b4c.png)
 
-
 Để PHPStorm hỗ trợ tốt hơn hãy cài thêm một số plugin sau:
-- .env files support 
+
+- .env files support
 - Laravel (Hỗ trợ Laravel)
 - Laravel Idea (Hỗ trợ Laravel)
 - Tailwind Formatter (Hỗ trợ TailwindCSS)
@@ -205,8 +209,8 @@ kiểm tra thông tin trong file .evn
 
 ![image](https://user-images.githubusercontent.com/58522357/164887208-a4b76007-8202-41ff-bc56-efd092a5c5f2.png)
 
-
-Ở bước này PHPStorm sẽ yêu cầu tải driver thì cứ bấm tải để PHPStorm tự động tải và nhập đầy đủ thông tin (user, password, database, port) như bên dưới,
+Ở bước này PHPStorm sẽ yêu cầu tải driver thì cứ bấm tải để PHPStorm tự động tải và nhập đầy đủ thông tin (user,
+password, database, port) như bên dưới,
 sau khi nhập xong nhấn `Test connection` để kiểm tra để xem kết nối được csdl hay chưa, nếu thành công rồi thì bấm `OK`
 
 ![image](https://user-images.githubusercontent.com/58522357/164885899-482d7d85-c15c-4a29-9e70-8828544532a2.png)

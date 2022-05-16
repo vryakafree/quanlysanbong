@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Field;
-use Illuminate\Http\Request;
 use DB;
+use Illuminate\Http\Request;
 
 class FieldsController extends Controller
 {
@@ -14,14 +14,14 @@ class FieldsController extends Controller
         return view('fields.index', compact('fields'));
     }
 
-    public function create()
-    {
-        return view('fields.create');
-    }
-
     public function store(Request $request)
     {
         Field::create($request->all());
         return redirect()->route('fields.index');
+    }
+
+    public function create()
+    {
+        return view('fields.create');
     }
 }

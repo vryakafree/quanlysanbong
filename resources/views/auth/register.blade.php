@@ -10,34 +10,38 @@
         <x-auth-validation-errors class="mb-4" :errors="$errors"/>
 
         <form method="POST" action="{{ route('register') }}">
-        @csrf
+            @csrf
 
-        <!-- Name -->
+            <!-- Name -->
             <div>
                 <x-label for="name" :value="__('Name')"/>
 
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus placeholder="Enter your name"/>
+                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required
+                         autofocus placeholder="Enter your name"/>
             </div>
 
             <!-- Username -->
             <div class="mt-4">
                 <x-label for="username" :value="__('Username')"/>
 
-                <x-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required placeholder="Enter username"/>
+                <x-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')"
+                         required placeholder="Enter username"/>
             </div>
 
             <!-- Phone -->
             <div class="mt-4">
                 <x-label for="phone" :value="__('Phone')"/>
 
-                <x-input id="phone" class="block mt-1 w-full" type="tel" name="phone" :value="old('phone')" required placeholder="Input your number"/>
+                <x-input id="phone" class="block mt-1 w-full" type="tel" name="phone" :value="old('phone')" required
+                         placeholder="Input your number"/>
             </div>
 
             <!-- Email Address -->
             <div class="mt-4">
                 <x-label for="email" :value="__('Email')"/>
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required placeholder="Input your email"/>
+                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required
+                         placeholder="Input your email"/>
             </div>
 
             <!-- Password -->

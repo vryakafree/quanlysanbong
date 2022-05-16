@@ -1,6 +1,5 @@
 <?php
 
-use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,11 +23,11 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     $type = App\Models\Type::all();
-    return view('dashboard',['type' => $type]);
+    return view('dashboard', ['type' => $type]);
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('getField/{id}', function ($id) {
-    $field = App\Models\Field::where('type_id',$id)->get();
+    $field = App\Models\Field::where('type_id', $id)->get();
     return response()->json($field);
 });
 
@@ -38,4 +37,4 @@ Route::get('/timetable', function () {
 
 Route::resource('fields', 'App\Http\Controllers\FieldsController');
 Route::resource('bookfields', 'App\Http\Controllers\BookFieldsController');
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

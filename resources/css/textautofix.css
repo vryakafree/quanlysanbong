@@ -1,19 +1,22 @@
-.text{
-    overflow:hidden;
-    padding:0 0 0 20px;
+.text {
+    overflow: hidden;
+    padding: 0 0 0 20px;
 }
-.text input{
+
+.text input {
     text-align: center;
-    width:100%;
-    box-sizing:border-box;
-    padding:5px 15px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px 15px;
 }
+
 @media only screen and (max-width: 1024px) {
-    .text{
-        clear:both;
-        padding:0;
+    .text {
+        clear: both;
+        padding: 0;
     }
 }
+
 .flex-container {
     display: flex;
 }
@@ -21,44 +24,54 @@
 .flex-container > div {
     padding: 20px;
 }
+
 .pd-5 { /*tạo khoảng cách bằng 10px*/
     padding-left: 5px;
     padding-right: 5px;
 }
+
 .pd-10 { /*tạo khoảng cách bằng 10px*/
     padding-left: 10px;
     padding-right: 10px;
 }
+
 .pd-15 { /*tạo khoảng cách bằng 15px*/
     padding-left: 15px;
     padding-right: 15px;
 }
+
 span.baseline { /*căn chữ ngang hàng*/
     vertical-align: baseline;
 }
+
 span.sub { /*căn chữ xuống nhẹ*/
     vertical-align: sub;
 
 }
+
 span.super { /*căn chữ lên nhẹ*/
     vertical-align: super;
 
 }
+
 span.pixel { /*căn chữ xuống hàng*/
     vertical-align: -10px;
 
 }
-@media screen and (min-width: 601px) { /*đổi font màn to*/
-    p.example {
-      font-size: 16px;
-    }
-  }
 
-  @media screen and (max-width: 600px) { /*đổi font màn nhỏ*/
+@media screen and (min-width: 601px) {
+    /*đổi font màn to*/
     p.example {
-      font-size: 11px;
+        font-size: 16px;
     }
-  }
+}
+
+@media screen and (max-width: 600px) {
+    /*đổi font màn nhỏ*/
+    p.example {
+        font-size: 11px;
+    }
+}
 
 .formPopup {
     display: none;
