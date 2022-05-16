@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class BookField extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
     protected $fillable = [
         'user_id',
         'field_id',
@@ -17,5 +19,4 @@ class BookField extends Model
         'paid',
         'bill_cost'
     ];
-    public $timestamps = false;
 }

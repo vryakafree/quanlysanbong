@@ -28,9 +28,9 @@
 </head>
 <body class="font-sans antialiased">
 <div class="min-h-screen bg-gray-100">
-@include('layouts.navigation')
+    @include('layouts.navigation')
 
-<!-- Page Heading -->
+    <!-- Page Heading -->
     <header class="bg-white shadow">
         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
             {{ $header }}
@@ -44,3 +44,90 @@
 </div>
 </body>
 </html>
+
+<!----- scripts jquery--------->
+<script>
+    var hour = 0;
+    var cost = 0;
+
+
+    $(function () {
+        document.getElementById('dtlb').innerHTML = 'Bấm để chọn ngày: ';
+        if (moment().minute() < 30 && moment().minute() >= 0) {
+            var tstart = moment().startOf('hour').set('minute', 30);
+        } else if (moment().minute() >= 30 && moment().minute() <= 59) {
+            var tstart = moment().startOf('hour').set('minute', 0).add(1, 'hour');
+        }
+        var tend = moment(tstart).add(1.5, 'hour');
+        hour = (tend - tstart) / 1000 / 60;
+
+        document.getElementById('dtlb').innerHTML = 'Thời gian thuê: (tối thiểu là ' + hour + ' phút)';
+        document.getElementById('cost').innerHTML = hour * cost + ' đồng';
+        document.getElementById("start_at").value = tstart.format();
+        document.getElementById("end_at").value = tend.format();
+
+        $('input[name="datetimes"]').daterangepicker({
+            timePicker: true,
+            timePicker24Hour: true,
+            timePickerIncrement: 30,
+            minDate: moment(),
+            startDate: tstart,
+            endDate: tend,
+            locale: {
+                format: 'DD/MM/YYYY HH:mm'
+            }
+        }).on('show.daterangepicker', function (ev, picker) {
+            picker.container.find(".drp-selected").hide();
+        }).on('apply.daterangepicker', function () {
+            var dates = $('#date').val().split(' - ');
+            var startDate = moment(dates[0], 'DD/MM/YYYY HH:mm');
+            var endDate = moment(dates[1], 'DD/MM/YYYY HH:mm');
+            hour = (endDate - startDate) / 1000 / 60;
+            document.getElementById('dtlb').innerHTML = 'Thời gian thuê: ' + hour + ' phút';
+            document.getElementById('cost').innerHTML = hour * cost + ' đồng';
+            document.getElementById("start_at").value = startDate.format();
+            document.getElementById("end_at").value = endDate.format();
+        });
+    });
+
+
+    $(document).ready(function () {
+        $('form').submit(function (e) {
+            if (hour < 90 || hour > 180) {
+                alert('vui lòng đặt thời gian tối thiểu là 90 phút và tối đa là 180 phút!');
+                e.preventDefault();
+            }
+            $('input#cost').val($('label#cost').text().replace(' đồng', ''));
+        });
+    });
+
+    $(document).ready(function () {
+        $('#type').on('change', function () {
+            var typeID = $(this).val();
+            if (typeID) {
+                $.ajax({
+                    url: '/getField/' + typeID,
+                    type: "GET",
+                    data: {"_token": "{{ csrf_token() }}"},
+                    dataType: "json",
+                    success: function (data) {
+                        if (data) {
+                            $('#field').empty();
+                            $('#field').append('<option hidden>Chọn sân</option>');
+                            $.each(data, function (key, field) {
+                                $('select[name="field"]').append('<option value="' + key + '">' + field.field_name + '</option>');
+                                $('#field_id').val($('#field').text());
+                                cost = field.cost;
+                                document.getElementById('cost').innerHTML = hour * cost + ' đồng';
+                            });
+                        } else {
+                            $('#field').empty();
+                        }
+                    }
+                });
+            } else {
+                $('#field').empty();
+            }
+        });
+    });
+</script>
