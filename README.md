@@ -171,9 +171,6 @@ Creating quanlysanbong_laravel.test_1 ... done
 ### 13. Cấu hình dự án (Nếu bước này hoàn thành thì có thể truy cập localhost để xem thành quả, mỗi khi thay đổi gì liên quan đến file css thì đều chạy lại 2 phần front-end của bước này nhé!)
 
 ```bash
-# Khởi tạo các tệp tin hỗ trợ PHPStorm
-./vendor/bin/sail artisan ide-helper:models -N
-
 # Cài đặt thư viện hỗ trợ front-end
 ./vendor/bin/sail yarn install
 # Build các file cho front-end
@@ -181,6 +178,9 @@ Creating quanlysanbong_laravel.test_1 ... done
 
 # Migration database và seed data
 ./vendor/bin/sail artisan migrate:fresh --seed
+
+# Khởi tạo các tệp tin hỗ trợ PHPStorm
+./vendor/bin/sail artisan ide-helper:models -N
 
 # Nếu báo lỗi `password authentication failed for user "root"` thì hãy chạy lệnh sau, không thì hãy bỏ qua
 ./vendor/bin/sail down
