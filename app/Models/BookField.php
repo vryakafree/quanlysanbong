@@ -19,9 +19,4 @@ class BookField extends Model
         'paid',
         'bill_cost'
     ];
-
-    protected $rules = [
-        'start_at' => 'date_format:Y-m-d H:i:s|required|unique:fields_table',
-        'start_end' => 'date_format:Y-m-d H:i:s|required|unique:fields_table',
-];
 }
