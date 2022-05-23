@@ -71,6 +71,7 @@
             timePicker24Hour: true,
             timePickerIncrement: 30,
             minDate: moment(),
+            maxDate: moment().add(14, 'days'),
             startDate: tstart,
             endDate: tend,
             locale: {
@@ -115,13 +116,18 @@
                             $('#field').empty();
                             $('#field').append('<option hidden>Chọn sân</option>');
                             $.each(data, function (key, field) {
-                                $('select[name="field"]').append('<option value="' + key + '">' + field.field_name + '</option>');
-                                $('#field_id').val($('#field').text());
+                                $('select[name="field"]').append('<option value="'+field.id+'"> ' + field.field_name + '</option>');
                                 cost = field.cost;
                                 document.getElementById('cost').innerHTML = hour * cost + ' đồng';
+                                $(document).ready(function(){
+
+                                    $("#field").on("change",function(){
+                                        var GetValue=$("#field").val();
+                                        $("#field_id").val(GetValue);
+                                    });
+
+                                });
                             });
-                        } else {
-                            $('#field').empty();
                         }
                     }
                 });

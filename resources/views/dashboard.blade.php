@@ -12,6 +12,14 @@
         <x-field-form>
             <form method="POST" action="{{ route('bookfields.store') }} ">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
+                <div class="flex items-center justify-end mt-4">
+                    <x-button type="button" class="btn cancel" onclick="closeForm()">
+                        {{__('Close')}}
+                    </x-button>
+                    <x-button type="submit" class="ml-4">
+                        {{ __('Book Field') }}
+                    </x-button>
+                </div>
                 <div class="mb-3 pd-10 mt-4">
                     <label>Tên khách hàng: {{ Auth::user()->name }}</label>
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}"/>
@@ -43,8 +51,8 @@
                     </div>
                     <div>
                         <label for="field" class="form-label pd-10">Sân phù hợp: </label>
-                        <select class="form-control text-align: center" name="field" id="field"></select>
-                        <input type="text" name="field_id" id="field_id"/>
+                        <select class="form-control text-align: center" name="field" id="field" onchange="change"><option hidden>------------</option></select>
+                        <input type="hidden" name="field_id" id="field_id"/>
                     </div>
                 </div>
 
@@ -60,15 +68,6 @@
                         <input type="radio" name="paid" value="0"> Thanh toán trực tiếp<br>
                         <input type="radio" name="paid" value="1"> Chuyển khoản, ví điện tử<br>
                     </div>
-                </div>
-
-                <div class="flex items-center justify-end mt-4">
-                    <x-button type="button" class="btn cancel" onclick="closeForm()">
-                        {{__('Close')}}
-                    </x-button>
-                    <x-button type="submit" class="ml-4">
-                        {{ __('Book Field') }}
-                    </x-button>
                 </div>
             </form>
         </x-field-form>

@@ -16,7 +16,7 @@ class BookFieldsController extends Controller
     public function index()
     {
         $bookfields = BookField::all();
-        return view('bookfields.index', compact('bookfields'));
+        return view('user_stuff.timetable', compact('bookfields'));
     }
 
     /**
@@ -28,7 +28,6 @@ class BookFieldsController extends Controller
     public function store(Request $request)
     {
         BookField::create($request->all());
-        dd($request);
         return redirect()->route('bookfields.index');
     }
 
