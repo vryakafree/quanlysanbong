@@ -220,3 +220,8 @@ Sau khi kết nối thành công, PHPStorm sẽ hiện bảng bên dưới để
 
 ![image](https://user-images.githubusercontent.com/58522357/164887304-6431338d-a380-4314-bce8-2403bd534dbe.png)
 ![image](https://user-images.githubusercontent.com/58522357/164887331-98bf9691-92b0-475e-8e90-4f8ced623ebf.png)
+
+Để hiển thị ảnh, chạy lệnh sau để link public storage
+```bash
+./vendor/bin/sail php artisan storage:link
+```
