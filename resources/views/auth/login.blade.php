@@ -19,8 +19,8 @@
             <div>
                 <x-label for="email" :value="__('UPE')"/>
 
-                <input type="text" class="form-control" name="username" value="{{ old('username') }}"
-                       required="required" autofocus>
+                <x-input type="text" class="form-control" name="username" value="{{ old('username') }}"
+                       required="required" autofocus/>
 
             </div>
 
