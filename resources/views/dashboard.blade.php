@@ -81,4 +81,6 @@
             document.getElementById("popupForm").style.display = "none";
         }
     </script>
+
+    @livewire('fields-grid-view')
 </x-app-layout>

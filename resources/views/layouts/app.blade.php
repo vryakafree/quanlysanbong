@@ -24,7 +24,7 @@
     <script src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-
+    @laravelViewsStyles(laravel-views,tailwindcss,livewire)
 </head>
 <body class="font-sans antialiased">
 <div class="min-h-screen bg-gray-100">
@@ -42,6 +42,7 @@
         {{ $slot }}
     </main>
 </div>
+@laravelViewsScripts(laravel-views,livewire,alpine)
 </body>
 </html>
 
