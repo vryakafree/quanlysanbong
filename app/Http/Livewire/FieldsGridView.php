@@ -23,9 +23,9 @@ class FieldsGridView extends GridView
     public function card($model)
     {
         return [
-            'title' => $model->field_name,
-            'subtitle' => $model->cost,
-            'description' => $model->type_id,
+            'fieldname' => $model->field_name,
+            'cost' => $model->cost,
+            'type' => Type::find($model->type_id)->field_member,
             'image' => asset('storage/field.png'),
         ];
     }

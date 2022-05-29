@@ -1,8 +1,8 @@
 @props([
   'image' => '',
-  'title' => '',
-  'subtitle' => '',
-  'description' => '',
+  'fieldname' => '',
+  'cost' => '',
+  'type' => '',
   'withBackground' => false,
   'model',
   'actions' => [],
@@ -25,15 +25,15 @@
         <h3 class="font-bold leading-6 text-gray-900">
           @if ($hasDefaultAction)
             <a href="#!" class="hover:underline" wire:click.prevent="onCardClick({{ $model->getKey() }})">
-              {!! $title !!}
+              {!! $fieldname !!}
             </a>
           @else
-            {!! $title !!}
+            {!! $fieldname !!}
           @endif
         </h3>
-        @if ($subtitle)
+        @if ($cost)
           <span class="text-sm text-gray-600">
-            {!! $subtitle !!}/phút
+            {!! $cost !!}/phút
           </span>
         @endif
       </div>
@@ -44,20 +44,9 @@
         </div>
       @endif
     </div>
-
-      @if($description==1)
-              <p class="line-clamp-3 mt-2">
-                  Sân 5 người
-              </p>
-      @elseif ($description==2)
-              <p class="line-clamp-3 mt-2">
-                  sân 7 người
-              </p>
-      @else
-            <p class="line-clamp-3 mt-2">
-                sân 11 người
-            </p>
-      @endif
+      <p class="line-clamp-3 mt-2">
+          Số lượng: {!! $type !!}
+      </p>
   </div>
 
 </div>

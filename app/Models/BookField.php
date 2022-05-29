@@ -19,4 +19,9 @@ class BookField extends Model
         'paid',
         'bill_cost'
     ];
+
+    public function user()
+    {
+        return $this->hasMany('User');
+    }
 }

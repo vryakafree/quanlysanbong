@@ -33,16 +33,13 @@ class BookFieldsController extends Controller
         $attributes = [
             'field_id' => $request->input('field_id'),
             'start_at' => $request->input('start_at'),
-            'end_at' => $request->input('end_at')
         ];
 
         // return existing reservation if exists
         $bookfield = BookField::where($attributes)->first();
 
         if ($bookfield !== null) {
-            $message = "wrong answer";
-            echo "<script type='text/javascript'>alert('$message');</script>";
-            return redirect()->route('bookfields.create');
+            return redirect()->route('fields.index');
         }
 
         $attributes = [
