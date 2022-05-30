@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight inline-flex items-center">
                 Thông tin sân bóng
             </h2>
-            <x-button onclick="openForm()"><strong>{{__('Book Field Now')}}</strong></x-button>
+            <x-button onclick="openForm()"><strong>{{__('Đặt sân ngay!')}}</strong></x-button>
         </div>
     </x-slot>
 

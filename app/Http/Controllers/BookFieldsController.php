@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\BookField;
 use App\Models\Type;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\Boolean;
@@ -29,10 +31,9 @@ class BookFieldsController extends Controller
      */
     public function store(Request $request)
     {
-
         $attributes = [
             'field_id' => $request->input('field_id'),
-            'start_at' => $request->input('start_at'),
+            'start_at' => $request->date('start_at'),
         ];
 
         // return existing reservation if exists

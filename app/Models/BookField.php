@@ -20,6 +20,8 @@ class BookField extends Model
         'bill_cost'
     ];
 
+    protected $dates = ['start_at', 'end_at'];
+
     public function user()
     {
         return $this->hasMany('User');

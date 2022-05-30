@@ -1,7 +1,7 @@
 @props(['username', 'fieldname', 'startat', 'endat', 'paid', 'bill', 'phone','actions', 'model'])
 
 <div>
-    <x-field-form>
+    <div class="card-body">
   <div class="flex items-center space-x-4 ">
     <div name="user">
         {!! $username !!}
@@ -32,5 +32,5 @@
         </div>
     <x-lv-actions :actions="$actions" :model="$model" />
   </div>
-    </x-field-form>
+    </div>
 </div>

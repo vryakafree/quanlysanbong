@@ -6,7 +6,6 @@ use App\Models\BookField;
 use App\Models\Field;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\App;
 use LaravelViews\Views\ListView;
 
 class BFieldListView extends ListView
@@ -30,8 +29,8 @@ class BFieldListView extends ListView
         return [
             'username' => User::find($model->user_id)->name,
             'fieldname' => Field::find($model->field_id)->field_name,
-            'startat' => $model->start_at,
-            'endat' => $model->end_at,
+            'startat' => $model->start_at->format('d-m-Y H:i'),
+            'endat' => $model->end_at->format('d-m-Y H:i'),
             'paid' => $model->paid,
             'bill' => $model->bill_cost,
             'phone' => $model->phone,

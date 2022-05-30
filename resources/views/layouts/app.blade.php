@@ -64,8 +64,8 @@
 
         document.getElementById('dtlb').innerHTML = 'Thời gian thuê: (tối thiểu là ' + hour + ' phút)';
         document.getElementById('cost').innerHTML = hour * cost + ' đồng';
-        document.getElementById("start_at").value = tstart.format();
-        document.getElementById("end_at").value = tend.format();
+        document.getElementById("start_at").value = tstart;
+        document.getElementById("end_at").value = tend;
 
         $('input[name="datetimes"]').daterangepicker({
             timePicker: true,
@@ -87,8 +87,8 @@
             hour = (endDate - startDate) / 1000 / 60;
             document.getElementById('dtlb').innerHTML = 'Thời gian thuê: ' + hour + ' phút';
             document.getElementById('cost').innerHTML = hour * cost + ' đồng';
-            document.getElementById("start_at").value = startDate.format();
-            document.getElementById("end_at").value = endDate.format();
+            document.getElementById("start_at").value = startDate;
+            document.getElementById("end_at").value = endDate;
         });
     });
 
