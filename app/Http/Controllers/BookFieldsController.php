@@ -43,6 +43,20 @@ class BookFieldsController extends Controller
             return redirect()->route('fields.index');
         }
 
+        $attributes2 = [
+            'start_at' => $request->date('start_at'),
+            'end_at' => $request->date('end_at'),
+        ];
+
+        // return existing reservation if exists
+        $bookfield2 = BookField::where('field_id',$request->input('field_id'))
+            ->whereBetween('start_at',[$attributes2])
+            ->orWhereBetween('end_at',[$attributes2])->first();
+
+        if ($bookfield2 !== null) {
+            return redirect()->route('fields.index');
+        }
+
         $attributes = [
             'field_id' => $request->input('field_id'),
             'user_id' => $request->input('user_id'),

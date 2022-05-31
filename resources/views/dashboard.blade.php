@@ -74,7 +74,7 @@
     </div>
     <script>
         function openForm() {
-            document.getElementById("popupForm").style.display = "block";
+                document.getElementById("popupForm").style.display = "block";
         }
 
         function closeForm() {

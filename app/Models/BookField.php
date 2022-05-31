@@ -21,9 +21,4 @@ class BookField extends Model
     ];
 
     protected $dates = ['start_at', 'end_at'];
-
-    public function user()
-    {
-        return $this->hasMany('User');
-    }
 }

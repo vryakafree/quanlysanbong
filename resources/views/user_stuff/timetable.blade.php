@@ -2,7 +2,7 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             <?php
-            echo "Thông tin đặt sân ";
+            echo "Danh sách đặt sân ";
             ?>
         </h2>
 
