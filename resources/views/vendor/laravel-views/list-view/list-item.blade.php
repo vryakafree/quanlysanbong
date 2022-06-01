@@ -16,12 +16,12 @@
             {!! $endat !!}
         </div>
       @if ($paid==1)
-          <div class="text-sm" style="color:#4BB543" name="paid">
-              <b>đã thanh toán</b>
+          <div class="text-sm" style="color:#93b543" name="paid">
+              <b>Chuyển Khoảng</b>
           </div>
       @else
-          <div class="text-sm" style="color:#ff0000" name="paid">
-              <b>chưa thanh toán</b>
+          <div class="text-sm" style="color:#ec971f" name="paid">
+              <b>TT Trực Tiếp</b>
           </div>
       @endif
         <div class="text-sm" name="bill">
