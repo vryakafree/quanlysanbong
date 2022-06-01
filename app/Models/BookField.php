@@ -53,4 +53,14 @@ class BookField extends Model
 
         return $weekday. ', ' .$date->format($this->dateFormat ?: ' d/m/Y H:i');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function field()
+    {
+        return $this->belongsTo(Field::class);
+    }
 }

@@ -11,7 +11,12 @@ Route::group([
     'as' => config('admin.route.prefix') . '.',
 ], function (Router $router) {
 
-    $router->get('/', 'BookFieldController@index')->name('auth/book-fields');
+    $router->get('/', function () {
+        if (Auth::User() != null) {
+            return redirect('admin/auth/book-fields');
+        }
+        return view('auth.login');
+    });
     $router->resource('auth/users', UserController::class);
     $router->resource('auth/book-fields', BookFieldController::class);
     $router->resource('auth/fields', FieldController::class);
