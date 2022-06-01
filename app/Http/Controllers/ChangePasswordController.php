@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Rules\ValidRecaptcha;
 use Illuminate\Http\Request;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
@@ -40,6 +41,7 @@ class ChangePasswordController extends Controller
         $request->validate([
             'current_password' => ['required', new MatchOldPassword],
             'new_password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'g-recaptcha-response' => ['required', new ValidRecaptcha]
         ]);
 
         User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);

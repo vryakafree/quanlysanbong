@@ -53,6 +53,10 @@
                                              placeholder="Xác nhận mật khẩu mới"/>
                                 </div>
 
+                                <!-- Google reCaptcha -->
+                                <div class="mt-4 g-recaptcha" id="feedback-recaptcha" data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY')  }}"></div>
+                                <!-- End Google reCaptcha -->
+
                                 <div class="flex items-center justify-end mt-4">
                                     <div class="col-md-8 offset-md-4">
                                         <x-button type="submit" class="btn btn-primary">
