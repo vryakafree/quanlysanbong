@@ -26,6 +26,7 @@
     <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
     <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     @laravelViewsStyles(laravel-views,tailwindcss,livewire)
 </head>
 <body class="font-sans antialiased">
