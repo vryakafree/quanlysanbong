@@ -84,3 +84,96 @@
 
     @livewire('fields-grid-view')
 </x-app-layout>
+
+<!----- scripts jquery--------->
+<script>
+    var hour = 0;
+    var cost = 0;
+
+
+    $(function () {
+        document.getElementById('dtlb').innerHTML = 'Bấm để chọn ngày: ';
+        if (moment().minute() < 30 && moment().minute() >= 0) {
+            var tstart = moment().startOf('hour').set('minute', 30);
+        } else if (moment().minute() >= 30 && moment().minute() <= 59) {
+            var tstart = moment().startOf('hour').set('minute', 0).add(1, 'hour');
+        }
+        var tend = moment(tstart).add(1.5, 'hour');
+        hour = (tend - tstart) / 1000 / 60;
+
+        document.getElementById('dtlb').innerHTML = 'Thời gian thuê: (tối thiểu là ' + hour + ' phút)';
+        document.getElementById('cost').innerHTML = hour * cost + ' đồng';
+        document.getElementById("start_at").value = tstart;
+        document.getElementById("end_at").value = tend;
+
+        $('input[name="datetimes"]').daterangepicker({
+            timePicker: true,
+            timePicker24Hour: true,
+            timePickerIncrement: 30,
+            minDate: moment(),
+            maxDate: moment().add(14, 'days'),
+            startDate: tstart,
+            endDate: tend,
+            locale: {
+                format: 'DD/MM/YYYY HH:mm'
+            }
+        }).on('show.daterangepicker', function (ev, picker) {
+            picker.container.find(".drp-selected").hide();
+        }).on('apply.daterangepicker', function () {
+            var dates = $('#date').val().split(' - ');
+            var startDate = moment(dates[0], 'DD/MM/YYYY HH:mm');
+            var endDate = moment(dates[1], 'DD/MM/YYYY HH:mm');
+            hour = (endDate - startDate) / 1000 / 60;
+            document.getElementById('dtlb').innerHTML = 'Thời gian thuê: ' + hour + ' phút';
+            document.getElementById('cost').innerHTML = hour * cost + ' đồng';
+            document.getElementById("start_at").value = startDate;
+            document.getElementById("end_at").value = endDate;
+        });
+    });
+
+
+    $(document).ready(function () {
+        $('form').submit(function (e) {
+            if (hour < 90 || hour > 180) {
+                alert('vui lòng đặt thời gian tối thiểu là 90 phút và tối đa là 180 phút!');
+                e.preventDefault();
+            }
+            $('input#cost').val($('label#cost').text().replace(' đồng', ''));
+        });
+    });
+
+    $(document).ready(function () {
+        $('#type').on('change', function () {
+            var typeID = $(this).val();
+            if (typeID) {
+                $.ajax({
+                    url: '/getField/' + typeID,
+                    type: "GET",
+                    data: {"_token": "{{ csrf_token() }}"},
+                    dataType: "json",
+                    success: function (data) {
+                        if (data) {
+                            $('#field').empty();
+                            $('#field').append('<option hidden>Chọn sân</option>');
+                            $.each(data, function (key, field) {
+                                $('select[name="field"]').append('<option value="'+field.id+'"> ' + field.field_name + '</option>');
+                                cost = field.cost;
+                                document.getElementById('cost').innerHTML = hour * cost + ' đồng';
+                                $(document).ready(function(){
+
+                                    $("#field").on("change",function(){
+                                        var GetValue=$("#field").val();
+                                        $("#field_id").val(GetValue);
+                                    });
+
+                                });
+                            });
+                        }
+                    }
+                });
+            } else {
+                $('#field').empty();
+            }
+        });
+    });
+</script>

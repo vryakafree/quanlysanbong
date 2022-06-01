@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use App\Rules\ValidRecaptcha;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules;
 
 class RegisteredUserController extends Controller
@@ -29,6 +31,7 @@ class RegisteredUserController extends Controller
             'phone' => ['required', 'string', 'max:11', 'unique:users'],
             'email' => ['required', 'string', 'email:rfc,strict,dns,spoof,filter', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'g-recaptcha-response' => ['required', new ValidRecaptcha]
         ]);
 
         $user = User::create([
@@ -55,4 +58,5 @@ class RegisteredUserController extends Controller
     {
         return view('auth.register');
     }
+
 }

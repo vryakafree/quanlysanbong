@@ -37,4 +37,7 @@ Route::get('/timetable', function () {
 
 Route::resource('fields', 'App\Http\Controllers\FieldsController');
 Route::resource('bookfields', 'App\Http\Controllers\BookFieldsController');
+
+Route::get('change-password', 'App\Http\Controllers\ChangePasswordController@index');
+Route::post('change-password', 'App\Http\Controllers\ChangePasswordController@store')->name('change.password');
 require __DIR__ . '/auth.php';
