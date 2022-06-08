@@ -98,15 +98,17 @@ class UserController extends AdminController
         $form->display('id', 'ID');
         $form->text('name', __('Name'))->rules('required');
         $form->text('username', __('Username'))
-            ->creationRules(['required', "unique"])
+            ->creationRules(['required', "unique:{$connection}.{$userTable},username,{{id}}"])
             ->updateRules(['required', "unique:{$connection}.{$userTable},username,{{id}}"]);
         $form->password('password', __('Password'))->rules('required')
             ->default(function ($form) {
                 return $form->model()->password;
             });
-        $form->email('email', __('Email'));
+        $form->email('email', __('Email'))
+            ->creationRules(['required', "unique:{$connection}.{$userTable},email,{{id}}","email:rfc,strict,dns,spoof,filter"])
+            ->updateRules(['required', "unique:{$connection}.{$userTable},email,{{id}}","email:rfc,strict,dns,spoof,filter"]);
         $form->mobile('phone', __('Phone'))->options(['removeMaskOnSubmit' => 'true'])
-            ->creationRules(['required', "unique"])
+            ->creationRules(['required', "unique:{$connection}.{$userTable},phone,{{id}}"])
             ->updateRules(['required', "unique:{$connection}.{$userTable},phone,{{id}}"]);
         $form->datetime('email_verified_at', __('Email verified at'));
         $form->image('avatar', __('Avatar'))

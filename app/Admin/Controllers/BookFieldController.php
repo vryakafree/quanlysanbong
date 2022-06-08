@@ -3,12 +3,12 @@
 namespace App\Admin\Controllers;
 
 use App\Models\BookField;
-use App\Models\User;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use App\Admin\Selectable\Users;
+use App\Admin\Selectable\Fields;
 
 class BookFieldController extends AdminController
 {
@@ -71,7 +71,7 @@ class BookFieldController extends AdminController
         $form = new Form(new BookField());
 
         $form->belongsTo('user_id', Users::class,'Người dùng');
-        $form->number('field_id', __('Sân'));
+        $form->belongsTo('field_id',Fields::class, __('Sân'));
         $form->datetime('start_at', __('Bắt đầu'))->default(date('d-m-Y H:i:s'));
         $form->datetime('end_at', __('Kết thúc'))->default(date('d-m-Y H:i:s'));
         $form->switch('paid', __('Paid'));
