@@ -108,10 +108,9 @@ class UserController extends AdminController
         $form->mobile('phone', __('Phone'))->options(['removeMaskOnSubmit' => 'true'])
             ->creationRules(['required', "unique"])
             ->updateRules(['required', "unique:{$connection}.{$userTable},phone,{{id}}"]);
-        $form->datetime('email_verified_at', __('Email verified at'))->default(date('Y-m-d H:i:s'));
+        $form->datetime('email_verified_at', __('Email verified at'));
         $form->image('avatar', __('Avatar'))
             ->move('public/img/avatar');
-        $form->text('remember_token', __('Remember token'));
 
         $form->saving(function (Form $form) {
             if ($form->password && $form->model()->password != $form->password) {

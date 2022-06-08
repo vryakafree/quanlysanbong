@@ -45,6 +45,6 @@
         {{ $slot }}
     </main>
 </div>
-@laravelViewsScripts(laravel-views,livewire,alpine)
+@laravelViewsScripts(laravel-views,livewire)
 </body>
 </html>

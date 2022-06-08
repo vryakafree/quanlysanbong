@@ -3,8 +3,6 @@
 namespace App\Http\Livewire;
 
 use App\Models\BookField;
-use App\Models\Field;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use LaravelViews\Views\ListView;
 
@@ -26,14 +24,41 @@ class BFieldListView extends ListView
      */
     public function data($model)
     {
+        $weekday = date("l");
+        $weekday = strtolower($weekday);
+        switch($weekday) {
+            case 'monday':
+                $weekday = 'Thứ hai';
+                break;
+            case 'tuesday':
+                $weekday = 'Thứ ba';
+                break;
+            case 'wednesday':
+                $weekday = 'Thứ tư';
+                break;
+            case 'thursday':
+                $weekday = 'Thứ năm';
+                break;
+            case 'friday':
+                $weekday = 'Thứ sáu';
+                break;
+            case 'saturday':
+                $weekday = 'Thứ bảy';
+                break;
+            default:
+                $weekday = 'Chủ nhật';
+                break;
+        }
         return [
-            'username' => User::find($model->user_id)->name,
-            'fieldname' => Field::find($model->field_id)->field_name,
-            'startat' => $model->start_at->format('d-m-Y H:i'),
-            'endat' => $model->end_at->format('d-m-Y H:i'),
+            'username' => $model->user->name,
+            'fieldname' => $model->field->field_name,
+            'startat' => $weekday. ', ' .$model->start_at->format('d-m-Y H:i'),
+            'endat' => $weekday. ', ' .$model->end_at->format('d-m-Y H:i'),
             'paid' => $model->paid,
             'bill' => $model->bill_cost,
             'phone' => $model->phone,
         ];
     }
+
+    public $searchBy = ['user_id', 'user.name', 'user.phone'];
 }

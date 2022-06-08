@@ -9,7 +9,7 @@
     </x-slot>
 
     <div class="formPopup" id="popupForm">
-        <x-field-form>
+        <x-book>
             <form method="POST" name="frm" action="{{ route('bookfields.store') }} ">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                 <div class="mb-3 pd-10 mt-4">
@@ -71,7 +71,7 @@
                     </x-button>
                 </div>
             </form>
-        </x-field-form>
+        </x-book>
     </div>
     <script>
         function openForm() {
@@ -83,7 +83,8 @@
         }
     </script>
 
-    @livewire('fields-grid-view')
+    <x-field-form>@livewire('fields-grid-view')</x-field-form>
+
 </x-app-layout>
 
 <!----- scripts jquery--------->

@@ -8,5 +8,5 @@
         </div>
     </x-slot>
 
-    @livewire('b-field-list-view')
+    <x-field-form>@livewire('b-field-list-view')</x-field-form>
 </x-app-layout>
