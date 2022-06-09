@@ -70,7 +70,15 @@ class BookFieldController extends AdminController
     {
         $form = new Form(new BookField());
 
-        $form->belongsTo('user_id', Users::class,'Người dùng');
+        $form->radio('user','Người dùng')
+            ->options([
+                1 =>'Trong hệ thống',
+                2 =>'Người dùng mới',
+            ])->when(1, function (Form $form) {
+                $form->belongsTo('user_id', Users::class,'Chọn người dùng');
+            })->when(2, function (Form $form) {
+                $form->text('user.name','Tên người dùng');
+            });
         $form->belongsTo('field_id',Fields::class, __('Sân'));
         $form->datetime('start_at', __('Bắt đầu'))->default(date('d-m-Y H:i:s'));
         $form->datetime('end_at', __('Kết thúc'))->default(date('d-m-Y H:i:s'));
