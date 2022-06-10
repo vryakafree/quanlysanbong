@@ -31,38 +31,27 @@ class BookFieldsController extends Controller
      */
     public function store(Request $request)
     {
-        $attributes = [
-            'field_id' => $request->input('field_id'),
-            'start_at' => $request->date('start_at'),
-        ];
-
         // return existing reservation if exists
-        $bookfield = BookField::where($attributes)->first();
+        $bookfield = BookField::where('field_id', $request->input('field_id'))->where('start_at',$request->date('start_at'))
+            ->orWhere(function($query) use($request){
+                $query->where('field_id', $request->input('field_id'))->where('end_at',$request->date('end_at'));})
+            ->orWhere(function($query2) use($request){
+                $query2->where('field_id', $request->input('field_id'))->where('end_at','>=',$request->date('end_at'))->where('start_at','>=',$request->date('start_at'));
+            })
+            ->first();
 
         if ($bookfield !== null) {
-            $attributes2 = [
-                'start_at' => $request->date('start_at'),
-                'end_at' => $request->date('end_at'),
-            ];
-
-            $bookfield2 = BookField::whereBetween('start_at',[$attributes2])
-                ->orWhereBetween('end_at',[$attributes2])->first();
-
-            if ($bookfield2 !== null) {
                 return redirect()->route('fields.index');
             }
+        $bookfield = BookField::where('field_id', $request->input('field_id'))
+                ->whereBetween('start_at',[$request->date('start_at'), $request->date('end_at')])
+                ->orWhere(function($query) use($request){
+                    $query->where('field_id', $request->input('field_id'))->whereBetween('end_at',[$request->date('start_at'), $request->date('end_at')]);
+                })->first();
 
-            $attributes3 = [
-                'field_id' => $request->input('field_id'),
-            ];
-
-            // return existing reservation if exists
-            $bookfield3 = BookField::where($attributes3)->first();
-
-            if ($bookfield == $bookfield2 && $bookfield3) {
-                return redirect()->route('fields.index');
+        if ($bookfield !== null) {
+            return redirect()->route('fields.index');
             }
-        }
 
         $attributes = [
             'field_id' => $request->input('field_id'),
