@@ -3,7 +3,6 @@
 ## Thành viên
 
 - Trần Duy Anh - <duyanh221299@gmail.com>
-- Nguyễn Gia Hải
 - Nguyễn Thanh Phong
 
 ## Giảng viên hướng dẫn
