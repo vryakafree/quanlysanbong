@@ -4,9 +4,8 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight inline-flex items-center">
                 Danh sách đặt sân
             </h2>
-            <x-button onclick="openForm()"><strong>{{__('Thông tin đặt sân của tôi')}}</strong></x-button>
         </div>
     </x-slot>
-
-    <x-field-form>@livewire('b-field-list-view')</x-field-form>
+    @livewire('show-hide-component')
 </x-app-layout>
+

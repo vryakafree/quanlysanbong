@@ -29,6 +29,31 @@ class FieldSeeder extends Seeder
                 'cost' => '7000',
                 'type_id' => '3',
             ],
+            [
+                'field_name' => 'Sân D',
+                'cost' => '3000',
+                'type_id' => '1',
+            ],
+            [
+                'field_name' => 'Sân E',
+                'cost' => '5000',
+                'type_id' => '2',
+            ],
+            [
+                'field_name' => 'Sân F',
+                'cost' => '7000',
+                'type_id' => '3',
+            ],
+            [
+                'field_name' => 'Sân G',
+                'cost' => '3000',
+                'type_id' => '1',
+            ],
+            [
+                'field_name' => 'Sân H',
+                'cost' => '7000',
+                'type_id' => '3',
+            ],
         ]);
     }
 }

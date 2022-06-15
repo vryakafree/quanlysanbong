@@ -2,7 +2,7 @@
 
 <div>
     <div class="card-body">
-  <div class="flex items-center justify-center space-x-4 ">
+  <div class="flex items-center justify-between space-x-8 ">
     <div name="user">
         {!! $username !!}
     </div>
