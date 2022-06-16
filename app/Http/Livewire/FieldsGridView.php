@@ -32,4 +32,5 @@ class FieldsGridView extends GridView
 
     public $maxCols = 3;
     public $withBackground = true;
+    protected $paginate = 6;
 }

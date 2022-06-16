@@ -21,9 +21,9 @@ class BFieldSingleListView extends ListView
     /**
      * Sets the properties to every list item component
      *
-     * @param $model Current model for each card
+     * @param $model2 Current model for each card
      */
-    public function data($model)
+    public function data($model2)
     {
         $weekday = date("l");
         $weekday = strtolower($weekday);
@@ -51,13 +51,13 @@ class BFieldSingleListView extends ListView
                 break;
         }
         return [
-            'username' => $model->user->name,
-            'fieldname' => $model->field->field_name,
-            'startat' => $weekday. ', ' .$model->start_at->format('d-m-Y H:i'),
-            'endat' => $weekday. ', ' .$model->end_at->format('d-m-Y H:i'),
-            'paid' => $model->paid,
-            'bill' => $model->bill_cost,
-            'phone' => $model->phone,
+            'username' => $model2->user->name,
+            'fieldname' => $model2->field->field_name,
+            'startat' => $weekday. ', ' .$model2->start_at->format('d-m-Y H:i'),
+            'endat' => $weekday. ', ' .$model2->end_at->format('d-m-Y H:i'),
+            'paid' => $model2->paid,
+            'bill' => $model2->bill_cost,
+            'phone' => $model2->phone,
         ];
     }
 

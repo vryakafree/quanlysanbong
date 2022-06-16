@@ -1,10 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex items-center mt-4 justify-between">
+        <div class="flex items-center mt-4">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight inline-flex items-center">
                 Thông tin sân bóng
             </h2>
-            <x-laravel-views::buttons.button onclick="openForm()"><strong>{{__('Đặt sân ngay!')}}</strong></x-laravel-views::buttons.button>
         </div>
     </x-slot>
 
@@ -83,7 +82,12 @@
         }
     </script>
 
-    <x-field-form>@livewire('fields-grid-view')</x-field-form>
+    <x-field-form>
+        <div class="flex items-center mt-4 justify-end">
+            <x-laravel-views::buttons.button onclick="openForm()"><strong>{{__('Đặt sân ngay!')}}</strong></x-laravel-views::buttons.button>
+        </div>
+        @livewire('fields-grid-view')
+    </x-field-form>
 
 </x-app-layout>
 

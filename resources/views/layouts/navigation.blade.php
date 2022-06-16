@@ -45,7 +45,7 @@
                     <x-slot name="content">
                         <!-- Authentication -->
                             <x-dropdown-link :href="route('logout')">
-                                {{ __('Chỉnh Sửa Thông TIn') }}
+                                {{ __('Chỉnh Sửa Thông Tin') }}
                             </x-dropdown-link>
 
                             <x-dropdown-link :href="route('change.password')">

@@ -124,6 +124,8 @@ return [
     'key' => env('APP_KEY'),
 
     'cipher' => 'AES-256-CBC',
+    'GOOGLE_RECAPTCHA_KEY'=>'6LfrZDUgAAAAANCWCsSUOTKYlKDKeRct33CCBsyD',
+    'GOOGLE_RECAPTCHA_SECRET'=>'6LfrZDUgAAAAAF6fBIoZJOBg5U1h_fhNBtHbho92',
 
     /*
     |--------------------------------------------------------------------------
