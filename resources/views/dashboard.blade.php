@@ -84,7 +84,7 @@
 
     <x-field-form>
         <div class="flex items-center mt-4 justify-end">
-            <x-laravel-views::buttons.button onclick="openForm()"><strong>{{__('Đặt sân ngay!')}}</strong></x-laravel-views::buttons.button>
+            <x-button onclick="openForm()"><strong>{{__('Đặt sân ngay!')}}</strong></x-button>
         </div>
         @livewire('fields-grid-view')
     </x-field-form>

@@ -6,14 +6,7 @@
         </h2>
     </x-slot>
 
-    <x-field-form>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-header"></div>
-
-                        <div class="card-body">
+    <x-book>
                             <form method="POST" action="{{ route('change.password') }}">
                                 @csrf
 
@@ -65,12 +58,7 @@
                                     </div>
                                 </div>
                             </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </x-field-form>
+    </x-book>
 
 
 </x-app-layout>

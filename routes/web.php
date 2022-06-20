@@ -40,4 +40,7 @@ Route::resource('bookfields', 'App\Http\Controllers\BookFieldsController');
 
 Route::get('change-password', 'App\Http\Controllers\ChangePasswordController@index');
 Route::post('change-password', 'App\Http\Controllers\ChangePasswordController@store')->name('change.password');
+
+Route::get('change-info', 'App\Http\Controllers\ChangeInfoController@index');
+Route::post('change-info', 'App\Http\Controllers\ChangeInfoController@store')->name('change.info');
 require __DIR__ . '/auth.php';
