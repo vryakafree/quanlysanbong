@@ -5,13 +5,15 @@ VALUES (2, 0, 2, 'Admin', 'fa-tasks', null, null, null, null);
 INSERT INTO quanlysanbong.admin_menu (id, parent_id, `order`, title, icon, uri, permission, created_at, updated_at)
 VALUES (3, 2, 3, 'User', 'fa-users', 'auth/users', null, null, null);
 INSERT INTO quanlysanbong.admin_menu (id, parent_id, `order`, title, icon, uri, permission, created_at, updated_at)
-VALUES (4, 2, 4, 'Roles', 'fa-user', 'auth/roles', null, null, null);
+VALUES (4, 2, 5, 'Roles', 'fa-user', 'auth/roles', null, null, null);
 INSERT INTO quanlysanbong.admin_menu (id, parent_id, `order`, title, icon, uri, permission, created_at, updated_at)
-VALUES (5, 2, 5, 'Permission', 'fa-ban', 'auth/permissions', null, null, null);
+VALUES (5, 2, 6, 'Permission', 'fa-ban', 'auth/permissions', null, null, null);
 INSERT INTO quanlysanbong.admin_menu (id, parent_id, `order`, title, icon, uri, permission, created_at, updated_at)
-VALUES (6, 2, 6, 'Menu', 'fa-bars', 'auth/menu', null, null, null);
+VALUES (6, 2, 7, 'Menu', 'fa-bars', 'auth/menu', null, null, null);
 INSERT INTO quanlysanbong.admin_menu (id, parent_id, `order`, title, icon, uri, permission, created_at, updated_at)
-VALUES (7, 2, 7, 'Operation log', 'fa-history', 'auth/logs', null, null, null);
+VALUES (7, 2, 8, 'Operation log', 'fa-history', 'auth/logs', null, null, null);
+INSERT INTO quanlysanbong.admin_menu (id, parent_id, `order`, title, icon, uri, permission, created_at, updated_at)
+VALUES (8, 2, 4, 'Field', 'fa-soccer-ball-o', 'auth/fields', null, null, null);
 INSERT INTO quanlysanbong.admin_permissions (id, name, slug, http_method, http_path, created_at, updated_at)
 VALUES (1, 'All permission', '*', null, '*', null, null);
 INSERT INTO quanlysanbong.admin_permissions (id, name, slug, http_method, http_path, created_at, updated_at)

@@ -60,5 +60,5 @@ class BFieldListView extends ListView
         ];
     }
 
-    public $searchBy = ['user_id', 'user.name', 'user.phone'];
+    public $searchBy = ['user_id', 'user.name', 'user.phone', 'field.field_name'];
 }

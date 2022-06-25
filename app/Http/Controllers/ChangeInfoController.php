@@ -40,8 +40,8 @@ class ChangeInfoController extends Controller
         $request->validate([
             'new_name' => ['required', 'string', 'max:255'],
             'new_username' => ['required', 'string', 'max:190', 'unique:users,username,'.auth('web')->id()],
-            'new_email' => ['required', 'string', 'email:rfc,strict,dns,spoof,filter', 'max:255'],
-            'new_phone' => ['required', 'string', 'max:11']
+            'new_email' => ['required', 'string', 'email:rfc,strict,dns,spoof,filter', 'max:255', 'unique:users,email,'.auth('web')->id()],
+            'new_phone' => ['required', 'string', 'max:11','unique:users,phone,'.auth('web')->id()]
         ]);
 
         User::find(auth()->user()->id)->update([

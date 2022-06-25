@@ -22,12 +22,29 @@ class FieldsGridView extends GridView
 
     public function card($model)
     {
-        return [
-            'fieldname' => $model->field_name,
-            'cost' => $model->cost,
-            'type' => Type::find($model->type_id)->field_member,
-            'image' => asset('storage/field.png'),
-        ];
+        if(Type::find($model->type_id)->field_member=='5 người'){
+            return [
+                'fieldname' => $model->field_name,
+                'cost' => $model->cost,
+                'type' => Type::find($model->type_id)->field_member,
+                'image' => asset('storage/field5.jpg'),
+            ];
+        }
+        if(Type::find($model->type_id)->field_member=='7 người'){
+            return [
+                'fieldname' => $model->field_name,
+                'cost' => $model->cost,
+                'type' => Type::find($model->type_id)->field_member,
+                'image' => asset('storage/field7.jpg'),
+            ];
+        }else{
+            return [
+                'fieldname' => $model->field_name,
+                'cost' => $model->cost,
+                'type' => Type::find($model->type_id)->field_member,
+                'image' => asset('storage/field11.jpg'),
+            ];
+        }
     }
 
     public $maxCols = 3;
